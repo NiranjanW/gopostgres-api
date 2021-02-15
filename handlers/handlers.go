@@ -30,12 +30,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/dstroot/postgres-api/models"
+	model "github.com/dstroot/postgres-api/models"
 	// Load environment vars
-	_ "github.com/joho/godotenv/autoload"
+	// _ "github.com/joho/godotenv/autoload"
 	"github.com/julienschmidt/httprouter"
 	// Postgres driver
-	_ "github.com/lib/pq"
+	// _ "github.com/lib/pq"
 )
 
 // GetProduct retrieves the id of the product to be fetched from the requested

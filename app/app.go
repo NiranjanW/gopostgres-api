@@ -29,15 +29,18 @@ import (
 	"os"
 	"time"
 
+	// "github.com/didip/tollbooth/thirdparty/tollbooth_negroni"
 	"github.com/didip/tollbooth"
-	"github.com/didip/tollbooth/thirdparty/tollbooth_negroni"
+	"github.com/didip/tollbooth_negroni"
 	"github.com/dstroot/postgres-api/middleware/connlimit"
 	env "github.com/joeshaw/envdecode"
 	"github.com/thoas/stats"
 	"github.com/urfave/negroni"
+
 	// Load environment vars
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/julienschmidt/httprouter"
+
 	// Postgres driver
 	_ "github.com/lib/pq"
 	"github.com/pkg/errors"
@@ -136,7 +139,9 @@ func Initialize() (app App, err error) {
 	n.Use(connlimit.MaxAllowed(50))
 
 	// Rate limiter
-	limiter := tollbooth.NewLimiter(50, time.Second)
+	limiter := tollbooth.NewLimiter(50, nil)
+
+	// limiter := tollbooth.NewLimiter(1, time.Second, nil)
 	n.Use(tollbooth_negroni.LimitHandler(limiter))
 
 	n.UseHandler(app.Router)

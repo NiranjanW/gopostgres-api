@@ -4,13 +4,13 @@ import (
 	"database/sql"
 	"testing"
 
-	"github.com/dstroot/postgres-api/api"
+	"github.com/dstroot/postgres-api/app"
 )
 
 func TestGet(t *testing.T) {
 
 	// Initialize app
-	a, err := api.Initialize()
+	a, err := app.Initialize()
 	if err != nil {
 		t.Errorf("Expected clean initialization. Got %s", err.Error())
 	}
